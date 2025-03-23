@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "761899650876",
+    "project_id": "lunasphere-8060d",
+    "storage_bucket": "lunasphere-8060d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:761899650876:android:0cf64a524e97dc721b1839",
+        "android_client_info": {
+          "package_name": "com.example.lunasphere"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB60xQbCWeaXqSshq0Pz-S5qrLmt9oDVYo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
