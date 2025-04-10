@@ -58,7 +58,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 child: Text(
                   "LUNASPHERE",
                   style: TextStyle(
-                    fontFamily: "GrechenFuemen", // Match font from pubspec.yaml
+                    fontFamily: "RobotoCondensed-Italic-VariableFont_wght", // Match font from pubspec.yaml
                     fontSize: 50,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,

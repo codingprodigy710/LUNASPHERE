@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:lunasphere/screens/homescreen.dart';
+import 'package:lunasphere/screens/main_screen.dart';
 import 'package:lunasphere/screens/welcome_screen.dart'; // Ensure this is the correct import for navigation
+
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -34,7 +35,7 @@ class _SignUpPageState extends State<SignUpPage> {
       Future.delayed(Duration(seconds: 2), () {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => HomeScreen()),
+          MaterialPageRoute(builder: (context) => MainScreen()),
         );
       });
 
