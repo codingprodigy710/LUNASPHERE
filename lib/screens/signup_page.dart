@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lunasphere/screens/main_screen.dart';
-import 'package:lunasphere/screens/welcome_screen.dart'; // Ensure this is the correct import for navigation
+// Ensure this is the correct import for navigation
 
 
 class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
+
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }
@@ -105,11 +107,11 @@ class _SignUpPageState extends State<SignUpPage> {
                 // Sign Up Button
                 ElevatedButton(
                   onPressed: _signUp,
-                  child: Text("Sign Up"),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.deepPurpleAccent,
                     padding: EdgeInsets.symmetric(horizontal: 40, vertical: 12),
                   ),
+                  child: Text("Sign Up"),
                 ),
               ],
             ),

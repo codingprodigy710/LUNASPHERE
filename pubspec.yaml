@@ -65,8 +65,9 @@ flutter:
   assets:
     - assets/videos/background.mp4
   fonts:
-    - family: GrechenFuemen  # Change to your chosen font name
+    - family: LunasphereFont # Change to your chosen font name
       fonts:
+        - asset: assets/fonts/entireappfont.ttf
         - asset: assets/fonts/GrechenFuemen-Regular.ttf
         - asset: assets/fonts/RobotoCondensed-Italic-VariableFont_wght.ttf
 

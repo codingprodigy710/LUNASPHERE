@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lunasphere/screens/main_screen.dart';
-import 'package:lunasphere/screens/welcome_screen.dart';
+import 'package:lunasphere/widgets/login_page_style.dart';
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -20,22 +22,19 @@ class _LoginPageState extends State<LoginPage> {
         password: passwordController.text.trim(),
       );
 
-      // Show a success message before navigating
+      // Show success message
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text("Successfully Signed In!", style: TextStyle(color: Colors.white)),
-          backgroundColor: Colors.green,
-          duration: Duration(seconds: 2), // Delay before navigation
+          backgroundColor: Colors.red,
         ),
       );
 
-      // Delay before navigating to WelcomeScreen
-      Future.delayed(Duration(seconds: 2), () {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => MainScreen()),
-        );
-      });
+      // Navigate right after showing snackbar
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => MainScreen()),
+      );
 
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -44,16 +43,18 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: Colors.black, // Black background
+      backgroundColor: theme.colorScheme.background,
       body: Stack(
         children: [
           // Background Logo
           Positioned.fill(
             child: Opacity(
-              opacity: 0.1, // Faint background effect
+              opacity: 0.08,
               child: Image.asset(
                 "assets/images/lunasphere_logo.png",
                 fit: BoxFit.contain,
@@ -63,12 +64,12 @@ class _LoginPageState extends State<LoginPage> {
 
           // Back Button
           Positioned(
-            top: 40, // Adjust position
+            top: 40,
             left: 20,
             child: IconButton(
               icon: Icon(Icons.arrow_back, color: Colors.white, size: 30),
               onPressed: () {
-                Navigator.pop(context); // Go back to the previous screen
+                Navigator.pop(context);
               },
             ),
           ),
@@ -82,11 +83,11 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   // App Name
                   Text(
-                    "LUNASPHERE",
+                    "Lunasphere",
                     style: TextStyle(
+                      fontFamily: "LunasphereFont",
                       fontSize: 40,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Color(0xFFFF4081).withOpacity(0.8),
                       letterSpacing: 2,
                     ),
                   ),
@@ -95,19 +96,19 @@ class _LoginPageState extends State<LoginPage> {
                   // Email Field
                   TextField(
                     controller: emailController,
-                    style: TextStyle(color: Colors.black),
+                    style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       labelText: "Email",
-                      labelStyle: TextStyle(color: Colors.black54),
+                      labelStyle: TextStyle(color: Colors.grey),
                       filled: true,
-                      fillColor: Colors.white,
+                      fillColor: Colors.grey[900],
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: Colors.deepPurpleAccent, width: 2),
+                        borderSide: BorderSide(color: Color(0xFF9B59B6), width: 2),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: Colors.white, width: 1),
+                        borderSide: BorderSide(color: Colors.grey[700]!),
                       ),
                     ),
                   ),
@@ -116,36 +117,31 @@ class _LoginPageState extends State<LoginPage> {
                   // Password Field
                   TextField(
                     controller: passwordController,
-                    style: TextStyle(color: Colors.black),
                     obscureText: true,
+                    style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       labelText: "Password",
-                      labelStyle: TextStyle(color: Colors.black54),
+                      labelStyle: TextStyle(color: Colors.grey),
                       filled: true,
-                      fillColor: Colors.white,
+                      fillColor: Colors.grey[900],
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: Colors.deepPurpleAccent, width: 2),
+                        borderSide: BorderSide(color: Color(0xFF9B59B6), width: 2),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: Colors.white, width: 1),
+                        borderSide: BorderSide(color: Colors.grey[700]!),
                       ),
                     ),
                   ),
                   SizedBox(height: 30),
 
-                  // Login Button
-                  ElevatedButton(
+
+
+                  // Replace your login button:
+                  StaticGradientBorderButton(
+                    text: "LOGIN",
                     onPressed: loginUser,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.deepPurpleAccent,
-                      padding: EdgeInsets.symmetric(vertical: 14, horizontal: 50),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                      shadowColor: Colors.purpleAccent,
-                      elevation: 8,
-                    ),
-                    child: Text("LOGIN", style: TextStyle(fontSize: 18, color: Colors.white)),
                   ),
                 ],
               ),
