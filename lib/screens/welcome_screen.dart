@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
-import 'package:lunasphere/widgets/FancyOutlineButton.dart';
+import 'package:lunasphere/widgets/login_page_style.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -58,10 +58,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 children: [
                   // LUNASPHERE Title
                   Text(
-                    "Lunasphere",
+                    "LUNASPHERE",
                     style: TextStyle(
                       fontFamily: "LunasphereFont",
                       fontSize: 50,
+                      fontWeight: FontWeight.bold,
                       color: Color(0xFFFFE4E1),
                       letterSpacing: 5,
                     ),
@@ -69,11 +70,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   SizedBox(height: 40),
 
                   // Sign Up Button
-                  // Sign Up Button
                   if (_showUI) ...[
                     SizedBox(
-                      width: 250, // Set your desired width here
-                      child: FancyOutlineButton(
+                      //width: 250,
+                      child: StaticGradientBorderButton(
                         text: "Sign Up",
                         onPressed: () => Navigator.pushNamed(context, "/signup"),
                       ),
@@ -84,8 +84,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   // Log In Button
                   if (_showUI)
                     SizedBox(
-                      width: 250,
-                      child: FancyOutlineButton(
+                      //width: 250,
+                      child: StaticGradientBorderButton(
                         text: "Log In",
 
                         onPressed: () => Navigator.pushNamed(context, "/login"),

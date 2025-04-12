@@ -67,7 +67,8 @@ flutter:
   fonts:
     - family: LunasphereFont # Change to your chosen font name
       fonts:
-        - asset: assets/fonts/entireappfont.ttf
+        - asset: assets/fonts/Barox-DemoVersion-Regular.ttf
+        - asset: assets/fonts/Caliste.ttf
         - asset: assets/fonts/GrechenFuemen-Regular.ttf
         - asset: assets/fonts/RobotoCondensed-Italic-VariableFont_wght.ttf
 

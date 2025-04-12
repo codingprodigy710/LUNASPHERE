@@ -26,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text("Successfully Signed In!", style: TextStyle(color: Colors.white)),
-          backgroundColor: Colors.red,
+          backgroundColor: Color(0xFF7228D3).withOpacity(0.6),
         ),
       );
 
@@ -48,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: theme.colorScheme.background,
+      backgroundColor: theme.colorScheme.surface,
       body: Stack(
         children: [
           // Background Logo
@@ -83,11 +83,12 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   // App Name
                   Text(
-                    "Lunasphere",
+                    "LUNASPHERE",
                     style: TextStyle(
                       fontFamily: "LunasphereFont",
+                      fontWeight: FontWeight.bold,
                       fontSize: 40,
-                      color: Color(0xFFFF4081).withOpacity(0.8),
+                      color: Colors.white,
                       letterSpacing: 2,
                     ),
                   ),
@@ -96,6 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                   // Email Field
                   TextField(
                     controller: emailController,
+                    cursorColor: Colors.purple,
                     style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       labelText: "Email",
@@ -118,6 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                   TextField(
                     controller: passwordController,
                     obscureText: true,
+                    cursorColor: Colors.purple,
                     style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       labelText: "Password",
