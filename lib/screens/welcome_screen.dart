@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:lunasphere/widgets/login_page_style.dart';
-
+import 'package:lunasphere/widgets/RotatingMoonscreen.dart';
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
 
@@ -47,6 +47,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
           // Dark overlay
           Container(color: Colors.black.withOpacity(0.4)),
+
+          const RotatingMoonBackground(),
 
           // Fade-in UI
           AnimatedOpacity(

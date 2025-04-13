@@ -66,6 +66,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/videos/background.mp4
+    - assets/images/moon.png
     - assets/images/default_profile.png
     - assets/images/post_placeholder.png
   fonts:
