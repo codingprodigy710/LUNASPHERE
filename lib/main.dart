@@ -12,8 +12,8 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   // Define custom colors
-  final Color primaryColor = const Color(0xFF25CFD5); // Deep Orange
-  final Color secondaryColor = const Color(0xFF7228D3); // Red
+  final Color primaryColor = const Color(0xFF25CFD5); // teal
+  final Color secondaryColor = const Color(0xFF7228D3); // dark purple
   final Color backgroundColor = const Color(0xFF121212);
 
   const MyApp({super.key}); // Dark
