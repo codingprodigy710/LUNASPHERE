@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:lunasphere/screens/main_screen.dart';
 import 'package:lunasphere/widgets/login_page_style.dart';
 
@@ -13,15 +14,64 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController(); // Username controller
   final FirebaseAuth _auth = FirebaseAuth.instance;
   String _errorMessage = '';
 
   Future<void> _signUp() async {
+    String username = _usernameController.text.trim();
+    String email = _emailController.text.trim();
+    String password = _passwordController.text.trim();
+
+    // Validate username
+    if (username.isEmpty || username.length < 3 || username.contains(' ')) {
+      setState(() {
+        _errorMessage = "Invalid username. Use at least 3 characters with no spaces.";
+      });
+      return;
+    }
+
+    // Validate email format (basic check)
+    if (!RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$').hasMatch(email)) {
+      setState(() {
+        _errorMessage = "Invalid email format.";
+      });
+      return;
+    }
+
+    // Check if password is strong enough
+    if (password.length < 6) {
+      setState(() {
+        _errorMessage = "Password should be at least 6 characters long.";
+      });
+      return;
+    }
+
     try {
+      // Create user in Firebase Authentication
       final userCredential = await _auth.createUserWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
+        email: email,
+        password: password,
       );
+
+      // Check if username is already taken (Firebase Firestore query)
+      var snapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .where('username', isEqualTo: username)
+          .get();
+
+      if (snapshot.docs.isNotEmpty) {
+        setState(() {
+          _errorMessage = "Username is already taken.";
+        });
+        return;
+      }
+
+      // Save the username and other user details in Firestore
+      await FirebaseFirestore.instance.collection('users').doc(userCredential.user!.uid).set({
+        'username': username,
+        'email': email,
+      });
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -55,7 +105,7 @@ class _SignUpPageState extends State<SignUpPage> {
             child: Opacity(
               opacity: 0.1,
               child: Image.asset(
-                "assets/images/lunasphere_logo.png",
+                "assets/images/lunasphere_logo.jpeg",
                 fit: BoxFit.contain,
               ),
             ),
@@ -88,10 +138,18 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
                 SizedBox(height: 20),
+
+                // Username Field
+                _buildTextField(_usernameController, "Username", Icons.person),
+
+                // Email Field
                 _buildTextField(_emailController, "Email", Icons.email),
+
+                // Password Field
                 _buildTextField(_passwordController, "Password", Icons.lock, isPassword: true),
                 SizedBox(height: 10),
 
+                // Display error message if any
                 if (_errorMessage.isNotEmpty)
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -101,11 +159,9 @@ class _SignUpPageState extends State<SignUpPage> {
                 SizedBox(height: 20),
 
                 // Sign Up Button
-                SizedBox(
-                  child: StaticGradientBorderButton(
-                    text: "Sign Up",
-                    onPressed: _signUp,
-                  ),
+                StaticGradientBorderButton(
+                  text: "Sign Up",
+                  onPressed: _signUp,
                 ),
                 SizedBox(height: 20),
               ],
@@ -116,6 +172,7 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
+  // Reusable TextField Builder
   Widget _buildTextField(TextEditingController controller, String hint, IconData icon, {bool isPassword = false}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),

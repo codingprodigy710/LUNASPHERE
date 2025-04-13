@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:lunasphere/screens/login_page.dart';
 
 class ProfileTab extends StatelessWidget {
@@ -49,10 +50,29 @@ class ProfileTab extends StatelessWidget {
             ),
 
             // Username and edit profile (optional)
-            Text(
-              user?.email ?? "username",
-              style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+            FutureBuilder<DocumentSnapshot>(
+              future: FirebaseFirestore.instance
+                  .collection('users')
+                  .doc(user?.uid) // Fetch the user document by uid
+                  .get(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                }
+
+                if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                }
+
+                // Get the username from the user document
+                String username = snapshot.data?.get('username') ?? "Username not found";
+                return Text(
+                  username,
+                  style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                );
+              },
             ),
+
             const SizedBox(height: 10),
 
             // Post Grid (placeholder)
