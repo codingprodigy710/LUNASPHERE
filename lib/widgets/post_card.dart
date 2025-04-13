@@ -18,52 +18,79 @@ class PostCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const Color primaryColor = Color(0xFF25CFD5);
+    const Color secondaryColor = Color(0xFF7228D3);
+    const Color backgroundColor = Color(0xFF121212);
+
     return Container(
-      color: Colors.black,
       margin: const EdgeInsets.symmetric(vertical: 8),
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        borderRadius: BorderRadius.circular(12),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Username and Profile Image
+          // Header: Profile picture + username
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
             child: Row(
               children: [
                 CircleAvatar(
                   backgroundImage: NetworkImage(profileImageUrl),
                   radius: 20,
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 10),
                 Text(
                   username,
-                  style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                  ),
                 ),
+                const Spacer(),
+                Icon(Icons.more_vert, color: Colors.white54),
               ],
             ),
           ),
 
-          // Image
-          Image.network(imageurl),
-
-          // Caption
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              caption,
-              style: const TextStyle(color: Colors.white70),
+          // Post image
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Image.network(
+              imageurl,
+              fit: BoxFit.cover,
+              width: double.infinity,
             ),
           ),
+
+          // Caption
+          if (caption.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              child: Text(
+                caption,
+                style: const TextStyle(
+                  color: Colors.white70,
+                  fontSize: 14,
+                ),
+              ),
+            ),
 
           // Timestamp
           Padding(
-            padding: const EdgeInsets.only(left: 8.0, bottom: 8.0),
+            padding: const EdgeInsets.only(left: 12, bottom: 10),
             child: Text(
               timestamp,
-              style: TextStyle(color: Colors.white38, fontSize: 12),
+              style: TextStyle(
+                color: Colors.white38,
+                fontSize: 12,
+              ),
             ),
           ),
 
-          const Divider(color: Colors.white12),
+          const Divider(color: Colors.white10, thickness: 0.5, height: 0),
         ],
       ),
     );

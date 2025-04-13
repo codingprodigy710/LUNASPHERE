@@ -12,9 +12,11 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   // Define custom colors
-  final Color primaryColor = const Color(0xFFFF6F00); // Deep Orange
-  final Color secondaryColor = const Color(0xFFD50000); // Red
-  final Color backgroundColor = const Color(0xFF121212); // Dark
+  final Color primaryColor = const Color(0xFF25CFD5); // teal
+  final Color secondaryColor = const Color(0xFF7228D3); // dark purple
+  final Color backgroundColor = const Color(0xFF121212);
+
+  const MyApp({super.key}); // Dark
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +29,10 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.dark(
           primary: primaryColor,
           secondary: secondaryColor,
-          background: backgroundColor,
+          surface: backgroundColor,
           onPrimary: Colors.white,
           onSecondary: Colors.white,
-          onBackground: Colors.white,
+          onSurface: Colors.white,
         ),
         appBarTheme: AppBarTheme(
           backgroundColor: primaryColor,

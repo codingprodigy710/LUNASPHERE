@@ -14,6 +14,10 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
 
+  final Color primaryColor = const Color(0xFF25CFD5);
+  final Color secondaryColor = const Color(0xFF7228D3);
+  final Color backgroundColor = const Color(0xFF121212);
+
   final List<Widget> _tabs = const [
     HomeTab(),
     SearchTab(),
@@ -21,18 +25,49 @@ class _MainScreenState extends State<MainScreen> {
     ProfileTab(),
   ];
 
+  final List<String> _titles = [
+    'Home',
+    'Search',
+    'Upload',
+    'Profile',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: backgroundColor,
+
+      appBar: AppBar(
+        title: Text(
+          _titles[_currentIndex],
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 22,
+            letterSpacing: 1.2,
+          ),
+        ),
+        centerTitle: true,
+        elevation: 0,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [secondaryColor, primaryColor],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
+      ),
+
       body: _tabs[_currentIndex],
 
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.black,
-        selectedItemColor: Colors.purpleAccent,
+        backgroundColor: backgroundColor,
+        selectedItemColor: secondaryColor,
         unselectedItemColor: Colors.white60,
         type: BottomNavigationBarType.fixed,
         selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+        unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w500),
         currentIndex: _currentIndex,
         onTap: (index) {
           setState(() {

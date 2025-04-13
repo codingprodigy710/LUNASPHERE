@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lunasphere/screens/main_screen.dart';
-// Ensure this is the correct import for navigation
-
+import 'package:lunasphere/widgets/login_page_style.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -24,23 +23,20 @@ class _SignUpPageState extends State<SignUpPage> {
         password: _passwordController.text.trim(),
       );
 
-      // Show a success message before navigating
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text("Successfully Signed Up!", style: TextStyle(color: Colors.white)),
-          backgroundColor: Colors.green,
-          duration: Duration(seconds: 2), // Delay before navigation
+          backgroundColor: Color(0xFFAF4C99),
+          duration: Duration(seconds: 2),
         ),
       );
 
-      // Delay before navigating to WelcomeScreen
       Future.delayed(Duration(seconds: 2), () {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => MainScreen()),
         );
       });
-
     } catch (e) {
       setState(() {
         _errorMessage = e.toString();
@@ -51,13 +47,13 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black, // Black background
+      backgroundColor: Colors.black,
       body: Stack(
         children: [
           // Background Logo
           Positioned.fill(
             child: Opacity(
-              opacity: 0.1, // Faint background effect
+              opacity: 0.1,
               child: Image.asset(
                 "assets/images/lunasphere_logo.png",
                 fit: BoxFit.contain,
@@ -67,12 +63,12 @@ class _SignUpPageState extends State<SignUpPage> {
 
           // Back Button
           Positioned(
-            top: 40, // Adjust position
+            top: 40,
             left: 20,
             child: IconButton(
               icon: Icon(Icons.arrow_back, color: Colors.white, size: 30),
               onPressed: () {
-                Navigator.pop(context); // Go back to the previous screen
+                Navigator.pop(context);
               },
             ),
           ),
@@ -85,6 +81,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 Text(
                   "LUNASPHERE",
                   style: TextStyle(
+                    fontFamily: "LunasphereFont",
                     fontSize: 36,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
@@ -95,24 +92,22 @@ class _SignUpPageState extends State<SignUpPage> {
                 _buildTextField(_passwordController, "Password", Icons.lock, isPassword: true),
                 SizedBox(height: 10),
 
-                // Error Message Display
                 if (_errorMessage.isNotEmpty)
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Text(_errorMessage, style: TextStyle(color: Colors.red, fontSize: 14)),
+                    child: Text(_errorMessage, style: TextStyle(color: Color(0xFF215CF3), fontSize: 14)),
                   ),
 
                 SizedBox(height: 20),
 
                 // Sign Up Button
-                ElevatedButton(
-                  onPressed: _signUp,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.deepPurpleAccent,
-                    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 12),
+                SizedBox(
+                  child: StaticGradientBorderButton(
+                    text: "Sign Up",
+                    onPressed: _signUp,
                   ),
-                  child: Text("Sign Up"),
                 ),
+                SizedBox(height: 20),
               ],
             ),
           ),
@@ -127,20 +122,21 @@ class _SignUpPageState extends State<SignUpPage> {
       child: TextField(
         controller: controller,
         obscureText: isPassword,
+        cursorColor: Colors.deepPurpleAccent, // Cursor color
         style: TextStyle(color: Colors.black),
         decoration: InputDecoration(
           hintText: hint,
           hintStyle: TextStyle(color: Colors.black54),
           prefixIcon: Icon(icon, color: Colors.black),
           filled: true,
-          fillColor: Colors.white,
+          fillColor: Color(0xFF444444).withOpacity(0.7),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide(color: Colors.deepPurpleAccent, width: 2),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(color: Colors.white, width: 1),
+            borderSide: BorderSide(color: Color(0xFF444444).withOpacity(0.7), width: 1),
           ),
         ),
       ),

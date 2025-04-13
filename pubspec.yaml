@@ -66,12 +66,13 @@ flutter:
   uses-material-design: true
   assets:
     - assets/videos/background.mp4
+    - assets/images/moon.png
     - assets/images/default_profile.png
     - assets/images/post_placeholder.png
   fonts:
     - family: LunasphereFont # Change to your chosen font name
       fonts:
-        - asset: assets/fonts/entireappfont.ttf
+        - asset: assets/fonts/Barox-DemoVersion-Regular.ttf
         - asset: assets/fonts/GrechenFuemen-Regular.ttf
         - asset: assets/fonts/RobotoCondensed-Italic-VariableFont_wght.ttf
 

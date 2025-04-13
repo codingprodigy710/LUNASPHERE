@@ -12,10 +12,10 @@ class HomeTab extends StatefulWidget {
 
 class _HomeTabState extends State<HomeTab> {
   final ScrollController _scrollController = ScrollController();
-  List<DocumentSnapshot> _posts = [];
+  final List<DocumentSnapshot> _posts = [];
   bool _isLoading = false;
   bool _hasMore = true;
-  int _documentLimit = 5;
+  final int _documentLimit = 5;
   DocumentSnapshot? _lastDocument;
 
   @override

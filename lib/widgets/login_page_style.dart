@@ -30,7 +30,7 @@ class StaticGradientBorderButton extends StatelessWidget {
           ),
         ),
         child: Container(
-          width: 138,
+          width: 136,
           height: 58,
           alignment: Alignment.center,
           decoration: BoxDecoration(
