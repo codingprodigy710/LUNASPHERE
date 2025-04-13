@@ -30,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
       );
 
-      // Navigate right after showing snackbar
+      // Navigate right after showing snack bar
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => MainScreen()),
@@ -41,6 +41,8 @@ class _LoginPageState extends State<LoginPage> {
         SnackBar(content: Text("Login failed. Check your credentials.")),
       );
     }
+
+
   }
 
 
